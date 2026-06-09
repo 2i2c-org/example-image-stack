@@ -23,31 +23,29 @@ They want to:
 
 This repository provides infrastructure for doing so, in an automated and easy way!
 
-## How to use this?
+## What is here?
 
 This repository contains 3 images:
 
-1. A "Base" image (under `base/`), which inherits from the popular `pangeo/pangeo-notebook`
-   image. Additional packages are added via `base/environment.yml` - in our case, we simply
-   add a version of `astropy`
-2. An example image for a `project1` (under `project1`), which inherits from the base image
+1. A ["Base" image](https://quay.io/repository/2i2c/example-image-stack-base?tab=tags) (under [`base/`](base/)), which inherits from the popular `pangeo/pangeo-notebook`
+   image. Additional packages are added via [`base/environment.yml`](base/environment.yml) - in our case, we add:
+   - `astropy`
+   - The ability to run VSCode in the browser (via [code-server](https://github.com/coder/code-server))
+   - The ability to connect *to* the hub via ssh, both from the terminal and from tools like local desktop VSCode (via [jupyter-sshd-proxy](https://github.com/yuvipanda/jupyter-sshd-proxy))
+2. An example image for a [`project1`](https://quay.io/repository/2i2c/example-image-stack-project1?tab=tags) (under [`project1`](project1/)), which inherits from the base image
    in this repository. In addition to the packages in base, we install the `ephem` astronomy
-   library.
-3. An example image for a `project2` (under `project2`), which inherits from the base image
+   library, via [`project1/environment.yml`](project1/environment.yml) file.
+3. An example image for a [`project2`](https://quay.io/repository/2i2c/example-image-stack-project2?tab=tags) (under `project2`), which inherits from the base image
    in this repository. In addition to the packages in base, we install the `pymc` astronomy
-   library.
+   library, via [`project2/environment.yml`](project2/environment.yml) file.
 
-## Features
+For each image, the following sets of tags are available:
 
-1. Inherits from a specific tagged version of the `jupyter/scipy-notebook`, whole image can be upgraded by changing
-   the `FROM` tag in `Dockerfile`
-2. All modifications happen in `environment.yml` file, which is not container specific. Regular users can use this too.
-3. Users can test out their image **interactively** by making a PR, which will automatically create a comment with a link to
-   mybinder.org, which will build the image *exactly* the same way our action does. This allows users to contribute packages
-   and changes to this repo without needing docker installed locally. [See example PR](https://github.com/yuvipanda/example-inherit-from-community-image/pull/1)
-4. On making PRs, a GitHub action builds the image to make sure it can be built. This catches issues with syntax errors and
-   missing versions.
-5. Tests inside the `image-tests/` directory are also run on each PR, allowing for more fine-grained tests - either as
-   `pytest` tests or as jupyter notebooks that must reproduce exactly. This helps catch issues with version upgrades breaking
-   your instructional code. The tests are invoked as part of the [`jupyterhub/repo2docker` action](https://github.com/jupyterhub/repo2docker-action). See [here](https://github.com/jupyterhub/repo2docker-action#testing-the-built-image#testing-the-built-image) for more details.
-6. When a PR is merged, the image is built and pushed to [quay.io](https://quay.io/repository/yuvipanda/example-inherit-from-community-image?tab=info)
+1. A `latest` tag, pointing to the last built image
+2. A tag for each day that the image was built (eg. `2026-04-10`, `2026-05-11`, etc)
+3. A tag for each git commit hash that was built (eg. `2a3db6e`, etc)
+
+Right now, the images are built each time a PR is merged. In the future, we will
+automatically build and tag images once every other week, so users have access to
+newer images *if* they would like, and admins can set default images for their
+communities as they desire.
