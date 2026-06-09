@@ -4,4 +4,4 @@ channels:
 dependencies:
   # Include dependencies here that are *not* in the base image
   # This can be pretty short
-  - fastapi # just as an example
+  - pymc

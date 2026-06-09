@@ -1,9 +1,41 @@
-# Inherit from a community maintained image
+# Example "Stack" of Docker Images
 
-This repo is an example of using [repo2docker-action](https://github.com/jupyterhub/repo2docker-action)
-to build a user image for your JupyterHub inheriting from a community maintained image and adding
-some packages to it. In this case, we inherit from the [jupyter/scipy-notebook](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-scipy-notebook)
-image, and add the packages listed in `environment.yml` to it.
+```mermaid
+flowchart TD
+    A[Pangeo Base Image] --> B[Communtity Base Image]
+    B --> C[Community Project Image 1]
+    B --> D[Community Project Image 2]
+    C --> C1["latest | 2026.04.01 | 2026.03.25 | ..."]
+    D --> D1["latest | 2026.04.01 | 2026.03.25 | ..."]
+```
+
+Communities want to provide their users with slightly customized versions of popular upstream
+images (like [pangeo](https://hub.docker.com/u/pangeo) or [jupyter/docker-stacks](https://github.com/jupyter/docker-stacks)).
+They want to:
+
+1. Have a 'base' image for their own community, adding packages & customizations
+   used by their entire community
+2. Have individual images that are specific to particular projects or subcommunities,
+   that inherit from the base community image and make further customizations.
+3. Provide tagged and dated releases of these images automatically, so users can
+   easily switch to newer versions of images or continue using existing images
+   as needed.
+
+This repository provides infrastructure for doing so, in an automated and easy way!
+
+## How to use this?
+
+This repository contains 3 images:
+
+1. A "Base" image (under `base/`), which inherits from the popular `pangeo/pangeo-notebook`
+   image. Additional packages are added via `base/environment.yml` - in our case, we simply
+   add a version of `astropy`
+2. An example image for a `project1` (under `project1`), which inherits from the base image
+   in this repository. In addition to the packages in base, we install the `ephem` astronomy
+   library.
+3. An example image for a `project2` (under `project2`), which inherits from the base image
+   in this repository. In addition to the packages in base, we install the `pymc` astronomy
+   library.
 
 ## Features
 
