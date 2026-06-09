@@ -11,7 +11,7 @@ dependencies:
 
   # Install some other UI
   - code-server
-  - openssh-server
+  - openssh
   - pip:
       - jupyter-sshd-proxy
       - jupyter-vscode-proxy
