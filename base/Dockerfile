@@ -5,7 +5,4 @@ FROM pangeo/pangeo-notebook:2026.06.04
 # packages that aren't in our base image.
 COPY environment.yml /tmp/environment.yml
 
-RUN mamba env update --prefix ${CONDA_DIR} --file /tmp/environment.yml
-
-# Check for vscode proxy?
-RUN find /srv | grep vscode
+RUN mamba env update --prefix ${NB_PYTHON_PREFIX} --file /tmp/environment.yml
