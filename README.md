@@ -49,3 +49,14 @@ Right now, the images are built each time a PR is merged. In the future, we will
 automatically build and tag images once every other week, so users have access to
 newer images *if* they would like, and admins can set default images for their
 communities as they desire.
+
+## Using older versions of images
+
+You can find the older versions of all these images by looking through the 'tags'
+page on quay.io for them:
+
+- [Base Image Tags](https://quay.io/repository/2i2c/example-image-stack-base?tab=tags)
+- [Project 1 Image Tags](https://quay.io/repository/2i2c/example-image-stack-project1?tab=tags)
+- [Project 2 Image Tags](https://quay.io/repository/2i2c/example-image-stack-project2?tab=tags)
+
+We recommend using tags with a date!
