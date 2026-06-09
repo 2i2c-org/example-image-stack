@@ -5,12 +5,12 @@ variable "image_name_prefix" {
 
 variable "git_sha" {
   type = string
-  default = "Git SHA whose first 12 chars are used as a tag"
+  default = "Git SHA that will be used as a tag"
 }
 
 function "image_tags" {
   params = [image_name]
-  result = ["${image_name}:latest", "${image_name}:${formattimestamp("YYYY-MM-DD", timestamp())}",  "${image_name}:${substr(git_sha, 0, 12)}"]
+  result = ["${image_name}:latest", "${image_name}:${formattimestamp("YYYY-MM-DD", timestamp())}",  "${image_name}:${git_sha}"]
 }
 
 group "default" {
