@@ -8,6 +8,11 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image:
+        - base
+
     steps:
 
     # For biggish images, github actions runs out of disk space.
@@ -32,10 +37,10 @@ jobs:
         # DOCKER_REGISTRY: "quay.io"
         NO_PUSH: "true"
         REPO_DIR: /srv/repo
-        SOURCE_SUBDIR: base
+        SOURCE_SUBDIR: ${{ matrix.image }}
 
         # Uncomment and modify the following line with your image name, otherwise no push will happen
-        IMAGE_NAME: "2i2c/example-image-stack-base"
+        IMAGE_NAME: "2i2c/example-image-stack-${{ matrix.image }}"
 
     # Lets us monitor disks getting full as images get bigger over time
     - name: Show how much disk space is left
