@@ -35,7 +35,7 @@ jobs:
         SOURCE_SUBDIR: base
 
         # Uncomment and modify the following line with your image name, otherwise no push will happen
-        IMAGE_NAME: "yuvipanda/example-inherit-from-community-image"
+        IMAGE_NAME: "2i2c/example-image-stack-base"
 
     # Lets us monitor disks getting full as images get bigger over time
     - name: Show how much disk space is left
