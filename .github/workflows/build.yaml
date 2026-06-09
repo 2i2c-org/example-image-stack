@@ -12,6 +12,8 @@ jobs:
       matrix:
         image:
         - base
+        - project1
+        - project2
 
     steps:
 
