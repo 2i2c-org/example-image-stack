@@ -8,3 +8,10 @@ dependencies:
   # Everyone wants to use nbgitpuller for distributing content, so include that
   - nbgitpuller
   - astropy
+
+  # Install some other UI
+  - code-server
+  - ssh-server
+  - pip:
+      - jupyter-sshd-proxy
+      - jupyter-vscode-proxy
