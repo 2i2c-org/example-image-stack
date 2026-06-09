@@ -4,10 +4,7 @@ channels:
 dependencies:
   # Include dependencies here that are *not* in the base image
   # This can be pretty short
-  
+
   # Everyone wants to use nbgitpuller for distributing content, so include that
-  - nbgitpuller=1.1.*
-  # Install packages from pip
-  - pip
-  - pip:
-    - otter-grader
+  - nbgitpuller
+  - astropy
