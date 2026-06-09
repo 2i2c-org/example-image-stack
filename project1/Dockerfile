@@ -1,5 +1,5 @@
-# Inherit from an upstream image
-FROM quay.io/2i2c/example-image-stack-base:latest
+ARG IMAGE_NAME_PREFIX
+FROM ${IMAGE_NAME_PREFIX}base:latest
 
 COPY environment.yml /tmp/environment.yml
 

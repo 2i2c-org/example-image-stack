@@ -24,47 +24,12 @@ jobs:
     - name: Checkout files in repo
       uses: actions/checkout@main
 
-    - name: Build base image
-      uses: yuvipanda/repo2docker-action@subdir
-      with:
-        # # Make sure username & password/token pair matches your registry credentials
-        DOCKER_USERNAME: ${{ secrets.QUAY_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
-        DOCKER_REGISTRY: "quay.io"
-        # NO_PUSH: "true"
-        REPO_DIR: /srv/repo
-        SOURCE_SUBDIR: base
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v4
 
-        # Uncomment and modify the following line with your image name, otherwise no push will happen
-        IMAGE_NAME: "2i2c/example-image-stack-base"
-
-    - name: Build project 1 image
-      uses: yuvipanda/repo2docker-action@subdir
-      with:
-        # # Make sure username & password/token pair matches your registry credentials
-        # DOCKER_USERNAME: ${{ secrets.QUAY_USERNAME }}
-        # DOCKER_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
-        # DOCKER_REGISTRY: "quay.io"
-        NO_PUSH: "true"
-        REPO_DIR: /srv/repo
-        SOURCE_SUBDIR: project1
-
-        # Uncomment and modify the following line with your image name, otherwise no push will happen
-        IMAGE_NAME: "2i2c/example-image-stack-project1"
-
-    - name: Build project 2 image
-      uses: yuvipanda/repo2docker-action@subdir
-      with:
-        # # Make sure username & password/token pair matches your registry credentials
-        # DOCKER_USERNAME: ${{ secrets.QUAY_USERNAME }}
-        # DOCKER_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
-        # DOCKER_REGISTRY: "quay.io"
-        NO_PUSH: "true"
-        REPO_DIR: /srv/repo
-        SOURCE_SUBDIR: project2
-
-        # Uncomment and modify the following line with your image name, otherwise no push will happen
-        IMAGE_NAME: "2i2c/example-image-stack-project2"
+    - name: Build images
+      run: |
+        docker buildx bake
 
     # Lets us monitor disks getting full as images get bigger over time
     - name: Show how much disk space is left
