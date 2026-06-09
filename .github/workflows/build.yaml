@@ -34,11 +34,22 @@ jobs:
         username: ${{ secrets.QUAY_USERNAME }}
         password: ${{ secrets.QUAY_PASSWORD }}
 
+    # Source - https://stackoverflow.com/a/59819441
+    # Posted by peterevans, modified by community. See post 'Timeline' for change history
+    # Retrieved 2026-06-09, License - CC BY-SA 4.0
+    - name: Set git sha
+      id: vars
+      run: echo "git_sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
     - name: Build and push
       uses: docker/bake-action@v7
       with:
         source: .
         push: true
+        vars: |
+          image_name_prefix=quay.io/2i2c/example-image-stack-
+          git_sha=${{ steps.vars.outputs.git_sha_short}}
+
 
     # Lets us monitor disks getting full as images get bigger over time
     - name: Show how much disk space is left

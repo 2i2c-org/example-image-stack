@@ -1,5 +1,4 @@
-ARG BASE_IMAGE
-FROM ${BASE_IMAGE}
+FROM base_image
 
 # We copy the `environment.yml` file in this repo, only adding in extra
 # packages that aren't in our base image.

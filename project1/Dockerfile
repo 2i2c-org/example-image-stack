@@ -1,5 +1,4 @@
-ARG BASE_IMAGE
-FROM ${BASE_IMAGE}
+FROM base_image
 
 COPY environment.yml /tmp/environment.yml
 

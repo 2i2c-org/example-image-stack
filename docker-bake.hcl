@@ -10,7 +10,7 @@ variable "git_sha" {
 
 function "image_tags" {
   params = [image_name]
-  result = [image_name, "${image_name}:${formattimestamp("YYYY-MM-DD", timestamp())}",  "${image_name}:${substr(git_sha, 0, 12)}"]
+  result = ["${image_name}:latest", "${image_name}:${formattimestamp("YYYY-MM-DD", timestamp())}",  "${image_name}:${substr(git_sha, 0, 12)}"]
 }
 
 group "default" {
@@ -28,6 +28,9 @@ target "project" {
     dir = ["project1", "project2"]
   }
   context = "${dir}"
+  contexts = {
+    base_image = "target:base"
+  }
   args = {
     BASE_IMAGE = "${image_name_prefix}base:latest"
   }
