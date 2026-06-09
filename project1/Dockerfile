@@ -1,5 +1,5 @@
-ARG IMAGE_NAME_PREFIX
-FROM ${IMAGE_NAME_PREFIX}base:latest
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
 
 COPY environment.yml /tmp/environment.yml
 

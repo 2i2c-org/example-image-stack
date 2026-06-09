@@ -1,5 +1,5 @@
-ARG IMAGE_NAME_PREFIX
-FROM ${IMAGE_NAME_PREFIX}base:latest
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
 
 # We copy the `environment.yml` file in this repo, only adding in extra
 # packages that aren't in our base image.
