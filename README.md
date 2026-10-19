@@ -51,9 +51,11 @@ newer images *if* they would like, and admins can set default images for their
 communities as they desire.
 
 ## Customizing the template
-There are two variables, that must be set in the GitHub repository settings, that control authentication with the Docker image registry:
+There are two _secrets_🕵️, that must be set in the GitHub repository settings, that control authentication with the Docker image registry:
 - `QUAY_USERNAME` — a username for a service account with push privileges to a particular image repository.
 - `QUAY_PASSWORD` — a password for the service account
+
+Finally, set a _variable_📢 to specify the image prefix
 - `IMAGE_PREFIX` — the prefix that images should use, e.g. `quay.io/2i2c/example-image-stack-`
 
 ## Using older versions of images
