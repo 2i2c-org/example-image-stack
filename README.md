@@ -50,6 +50,12 @@ automatically build and tag images once every other week, so users have access t
 newer images *if* they would like, and admins can set default images for their
 communities as they desire.
 
+## Customizing the template
+There are two variables, that must be set in the GitHub repository settings, that control authentication with the Docker image registry:
+- `QUAY_USERNAME` — a username for a service account with push privileges to a particular image repository.
+- `QUAY_PASSWORD` — a password for the service account
+- `IMAGE_PREFIX` — the prefix that images should use, e.g. `quay.io/2i2c/example-image-stack-`
+
 ## Using older versions of images
 
 You can find the older versions of all these images by looking through the 'tags'
